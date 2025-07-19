@@ -21,7 +21,7 @@ import logo9 from '../assets/images/NETcore.svg';
 import logo10 from '../assets/images/php.svg';
 import logo11 from '../assets/images/sql.png';
 import logo12 from '../assets/images/stripe.jpg';
-import logo13 from '../assets/images/razor.webp';
+import logo13 from '../assets/images/Razor.webp';
 
 function About() {
   return (

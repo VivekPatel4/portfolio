@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 // Import all images
 import iconDesign from '../assets/images/icon-design.svg';
 import iconDev from '../assets/images/icon-dev.svg';
@@ -23,7 +23,86 @@ import logo11 from '../assets/images/sql.png';
 import logo12 from '../assets/images/stripe.jpg';
 import logo13 from '../assets/images/Razor.webp';
 
+const testimonialsData = [
+  {
+    title: "🛒 Shop – E-commerce Platform",
+    avatar: avatar1,
+    alt: "Daniel lewis",
+    text: "A full-stack shopping platform with Admin and Customer portals. Customers can browse, filter, and buy products, manage carts and orders, while Admins handle products, categories, and user management. Integrated secure authentication,Integrated secure stripe payment gateway, REST API, and responsive UI using React (Vite), Tailwind, Node.js, MongoDB, and JWT."
+  },
+  {
+    title: "🎓 Student Management System",
+    avatar: avatar2,
+    alt: "Jessica miller",
+    text: "A multi-role system (Admin, Teacher, Student) built using ASP.NET and SQL Server. Includes modules for student and teacher registration, attendance via face recognition, timetable generation, fee tracking with Razorpay payment gateway, and leave management.Supports Google Sign-In (SSO) and Integrated Google Gemini AI as a chatbot assistant to support students with real-time queries."
+  },
+  {
+    title: "🏠 Property Management System",
+    avatar: avatar3,
+    alt: "Emily evans",
+    text: "Cross-platform solution with Flutter mobile app and React web dashboard for Agents, Vendors, and Admins. Features include property listing, contract management, and service assignment. Backend powered by .NET Core API with JWT/OAuth login and role-based access. Designed for real estate workflows and scalable deployment."
+  },
+  {
+    title: "🏨 Hostel Management (PHP)",
+    avatar: avatar4,
+    alt: "Henry william",
+    text: "A simple PHP-based system for managing hostel activities. Admin can add departments, create student accounts, and handle leave requests. Students can log in, apply for leave, and track their status. Features included email verification, password reset, and admin control over reminders and leave types. Lightweight UI with core PHP and MySQL."
+  }
+];
+
+const clientsData = [
+  logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8, logo9, logo10, logo11, logo12, logo13
+];
+
 function About() {
+  const testimonialsRef = useRef(null);
+  const clientsRef = useRef(null);
+
+  useEffect(() => {
+    const setupAutoScroll = (ref, speed = 1) => {
+      if (!ref.current) return;
+
+      let animationId;
+      const scroll = () => {
+        if (ref.current) {
+          ref.current.scrollLeft += speed;
+          // Reset scroll when it reaches the halfway point (end of first set)
+          if (ref.current.scrollLeft >= ref.current.scrollWidth / 2) {
+            ref.current.scrollLeft = 0;
+          }
+        }
+        animationId = requestAnimationFrame(scroll);
+      };
+
+      animationId = requestAnimationFrame(scroll);
+
+      const stopScroll = () => cancelAnimationFrame(animationId);
+      const startScroll = () => {
+        stopScroll();
+        animationId = requestAnimationFrame(scroll);
+      };
+
+      ref.current.addEventListener('mouseenter', stopScroll);
+      ref.current.addEventListener('mouseleave', startScroll);
+
+      return () => {
+        stopScroll();
+        if (ref.current) {
+          ref.current.removeEventListener('mouseenter', stopScroll);
+          ref.current.removeEventListener('mouseleave', startScroll);
+        }
+      };
+    };
+
+    const cleanupTestimonials = setupAutoScroll(testimonialsRef, 0.5);
+    const cleanupClients = setupAutoScroll(clientsRef, 0.5);
+
+    return () => {
+      cleanupTestimonials && cleanupTestimonials();
+      cleanupClients && cleanupClients();
+    };
+  }, []);
+
   return (
 
     <article className="about  active" data-page="about">
@@ -124,80 +203,24 @@ function About() {
 
         <h3 className="h3 testimonials-title">What I've Built</h3>
 
-        <ul className="testimonials-list has-scrollbar">
+        <ul className="testimonials-list has-scrollbar" ref={testimonialsRef} style={{ scrollSnapType: 'none', scrollBehavior: 'auto' }}>
+          {[...testimonialsData, ...testimonialsData].map((item, index) => (
+            <li className="testimonials-item" key={index}>
+              <div className="content-card" data-testimonials-item>
 
-          <li className="testimonials-item">
-            <div className="content-card" data-testimonials-item>
+                <figure className="testimonials-avatar-box">
+                  <img src={item.avatar} alt={item.alt} width="60" data-testimonials-avatar />
+                </figure>
 
-              <figure className="testimonials-avatar-box">
-                <img src={avatar1} alt="Daniel lewis" width="60" data-testimonials-avatar />
-              </figure>
+                <h4 className="h4 testimonials-item-title" data-testimonials-title>{item.title}</h4>
 
-              <h4 className="h4 testimonials-item-title" data-testimonials-title>🛒 Shop – E-commerce Platform</h4>
+                <div className="testimonials-text" data-testimonials-text>
+                  <p>{item.text}</p>
+                </div>
 
-              <div className="testimonials-text" data-testimonials-text>
-                <p>
-                A full-stack shopping platform with Admin and Customer portals. Customers can browse, filter, and buy products, manage carts and orders, while Admins handle products, categories, and user management. Integrated secure authentication,Integrated secure stripe payment gateway, REST API, and responsive UI using React (Vite), Tailwind, Node.js, MongoDB, and JWT.
-                </p>
               </div>
-
-            </div>
-          </li>
-
-          <li className="testimonials-item">
-            <div className="content-card" data-testimonials-item>
-
-              <figure className="testimonials-avatar-box">
-                <img src={avatar2} alt="Jessica miller" width="60" data-testimonials-avatar />
-              </figure>
-
-              <h4 className="h4 testimonials-item-title" data-testimonials-title>🎓 Student Management System</h4>
-
-              <div className="testimonials-text" data-testimonials-text>
-                <p>
-                A multi-role system (Admin, Teacher, Student) built using ASP.NET and SQL Server. Includes modules for student and teacher registration, attendance via face recognition, timetable generation, fee tracking with Razorpay payment gateway, and leave management.Supports Google Sign-In (SSO) and Integrated Google Gemini AI as a chatbot assistant to support students with real-time queries.
-                </p>
-              </div>
-
-            </div>
-          </li>
-
-          <li className="testimonials-item">
-            <div className="content-card" data-testimonials-item>
-
-              <figure className="testimonials-avatar-box">
-                <img src={avatar3} alt="Emily evans" width="60" data-testimonials-avatar />
-              </figure>
-
-              <h4 className="h4 testimonials-item-title" data-testimonials-title>🏠 Property Management System</h4>
-
-              <div className="testimonials-text" data-testimonials-text>
-                <p>
-                Cross-platform solution with Flutter mobile app and React web dashboard for Agents, Vendors, and Admins. Features include property listing, contract management, and service assignment. Backend powered by .NET Core API with JWT/OAuth login and role-based access. Designed for real estate workflows and scalable deployment.
-                </p>
-              </div>
-
-            </div>
-          </li>
-
-          <li className="testimonials-item">
-            <div className="content-card" data-testimonials-item>
-
-              <figure className="testimonials-avatar-box">
-                <img src={avatar4} alt="Henry william" width="60" data-testimonials-avatar />
-              </figure>
-
-              <h4 className="h4 testimonials-item-title" data-testimonials-title>🏨 Hostel Management (PHP)</h4>
-
-              <div className="testimonials-text" data-testimonials-text>
-                <p>
-                A simple PHP-based system for managing hostel activities. Admin can add departments, create student accounts, and handle leave requests. Students can log in, apply for leave, and track their status. Features included email verification, password reset, and admin control over reminders and leave types. Lightweight UI with core PHP and MySQL.
-                </p>
-              </div>
-
-            </div>
-          </li>
-
+            </li>
+          ))}
         </ul>
 
       </section>
@@ -258,86 +281,14 @@ function About() {
 
         <h3 className="h3 clients-title">Technologies I've Worked With</h3>
 
-        <ul className="clients-list has-scrollbar">
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo1} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo2} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo3} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo4} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo5} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo6} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo7} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo8} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo9} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo10} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo11} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo12} alt="client logo" />
-            </a>
-          </li>
-
-          <li className="clients-item">
-            <a href="#">
-              <img src={logo13} alt="client logo" />
-            </a>
-          </li>
-
+        <ul className="clients-list has-scrollbar" ref={clientsRef} style={{ scrollSnapType: 'none', scrollBehavior: 'auto' }}>
+          {[...clientsData, ...clientsData].map((logo, index) => (
+            <li className="clients-item" key={index}>
+              <a href="#">
+                <img src={logo} alt="client logo" />
+              </a>
+            </li>
+          ))}
         </ul>
 
       </section>

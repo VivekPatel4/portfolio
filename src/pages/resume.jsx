@@ -67,26 +67,37 @@ function Resume() {
         <ol className="timeline-list">
 
           <li className="timeline-item">
-            <h4 className="h4 timeline-item-title">Intern – Full Stack Developer (Outamation Company)</h4>
-            {/* <span>Jan 2024 — Apr 2024</span> */}
+            <h4 className="h4 timeline-item-title">Full Stack Developer</h4>
+            <span>2024 — Present</span>
+
             <p className="timeline-text">
-              Completed internship at Outamation Company as part of the final year project. Built a full-stack School Management System with roles for Admin, Student, and Teacher using ASP.NET and SQL Server. Integrated features like face recognition for attendance (Python), Razorpay fee payment, Google login, and Gemini AI chatbot.
+              Built end-to-end <strong>User Frontend</strong> and <strong>Admin Dashboard</strong> for a live tyre e-commerce business.
+              <br /><strong>User Frontend:</strong>
+              <br />• "Search by Vehicle/Size" filters, Inclusive Pricing Engine, and Booking System with 25% deposit.
+              <br />• Integrated Stripe for payments and Real-time Google Reviews.
+              <br /><strong>Admin Dashboard (CMS):</strong>
+              <br />• <strong>TimeSlot & Appointment Manager:</strong> dynamic slot configuration for customer bookings.
+              <br />• <strong>Inventory & Content:</strong> Full CRUD for Products, Brands, Services, Banners, and Blogs.
+              <br />• <strong>Business Logic:</strong> Modules for Managing Taxes, Holidays, Employees, and Invoices.
+              <br />• <strong>Security:</strong> Secure Admin Login with 2FA and Role-Based Access.
             </p>
           </li>
 
           <li className="timeline-item">
-            <h4 className="h4 timeline-item-title">E-Commerce Web Platform</h4>
-            {/* <span>Aug 2023 — Dec 2023</span> */}
+            <h4 className="h4 timeline-item-title">Full Stack Web Developer</h4>
+            <span>Internship (Outamation Company)</span>
             <p className="timeline-text">
-              Developed a scalable e-commerce app with admin and customer portals using React, Node.js, and MongoDB. Implemented product listings, order management, user auth (JWT),Integrated secure stripe payment gateway, and responsive UI.
+              Built a scalable <strong>School Management System</strong> feature-rich platform using ASP.NET Core & SQL Server.
+              Implemented Face Recognition Attendance (Python), Razorpay integration, Google SSO, and AI Chatbot (Gemini) for student support.
             </p>
           </li>
 
           <li className="timeline-item">
-            <h4 className="h4 timeline-item-title">Self-Learning & Mini Projects</h4>
-            {/* <span>2022 — Present</span> */}
+            <h4 className="h4 timeline-item-title">E-Commerce Developer</h4>
+            <span>Project Based</span>
             <p className="timeline-text">
-              Gained practical experience by building mini-projects including API integrations, automation tools using Puppeteer & Playwright, Firebase authentication, and Telegram bots.
+              Designed and deployed a MERN stack (MongoDB, Express, React, Node.js) shopping platform.
+              Focused on performance optimization, RESTful API design, complex MongoDB aggregations, and secure JWT authentication.
             </p>
           </li>
 
@@ -164,7 +175,27 @@ function Resume() {
 
           <li className="skills-item">
             <div className="title-wrapper">
-              <h5 className="h5">ASP.NET (Web Forms, MVC, Core)</h5>
+              <h5 className="h5">React.js, Next.js & Redux</h5>
+              <data value="90">90%</data>
+            </div>
+            <div className="skill-progress-bg">
+              <div className="skill-progress-fill" style={{ width: "90%" }}></div>
+            </div>
+          </li>
+
+          <li className="skills-item">
+            <div className="title-wrapper">
+              <h5 className="h5">Node.js, Express & REST APIs</h5>
+              <data value="90">90%</data>
+            </div>
+            <div className="skill-progress-bg">
+              <div className="skill-progress-fill" style={{ width: "90%" }}></div>
+            </div>
+          </li>
+
+          <li className="skills-item">
+            <div className="title-wrapper">
+              <h5 className="h5">ASP.NET Core & C#</h5>
               <data value="85">85%</data>
             </div>
             <div className="skill-progress-bg">
@@ -174,17 +205,7 @@ function Resume() {
 
           <li className="skills-item">
             <div className="title-wrapper">
-              <h5 className="h5">React & JavaScript</h5>
-              <data value="80">80%</data>
-            </div>
-            <div className="skill-progress-bg">
-              <div className="skill-progress-fill" style={{ width: "80%" }}></div>
-            </div>
-          </li>
-
-          <li className="skills-item">
-            <div className="title-wrapper">
-              <h5 className="h5">Node.js & Express</h5>
+              <h5 className="h5">Database (MongoDB, SQL, Firebase)</h5>
               <data value="85">85%</data>
             </div>
             <div className="skill-progress-bg">
@@ -194,31 +215,21 @@ function Resume() {
 
           <li className="skills-item">
             <div className="title-wrapper">
-              <h5 className="h5">SQL Server & MongoDB</h5>
-              <data value="80">80%</data>
+              <h5 className="h5">Payment Gateways (Stripe, Razorpay)</h5>
+              <data value="90">90%</data>
             </div>
             <div className="skill-progress-bg">
-              <div className="skill-progress-fill" style={{ width: "80%" }}></div>
+              <div className="skill-progress-fill" style={{ width: "90%" }}></div>
             </div>
           </li>
 
           <li className="skills-item">
             <div className="title-wrapper">
-              <h5 className="h5">Firebase & Authentication</h5>
-              <data value="70">70%</data>
+              <h5 className="h5">Auth & Security (JWT, OAuth, 2FA)</h5>
+              <data value="85">85%</data>
             </div>
             <div className="skill-progress-bg">
-              <div className="skill-progress-fill" style={{ width: "70%" }}></div>
-            </div>
-          </li>
-
-          <li className="skills-item">
-            <div className="title-wrapper">
-              <h5 className="h5">Razorpay & API Integration</h5>
-              <data value="75">75%</data>
-            </div>
-            <div className="skill-progress-bg">
-              <div className="skill-progress-fill" style={{ width: "75%" }}></div>
+              <div className="skill-progress-fill" style={{ width: "85%" }}></div>
             </div>
           </li>
 

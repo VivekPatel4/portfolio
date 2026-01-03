@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import sctHero from '../assets/images/sct_hero.png';
+import sctSearch from '../assets/images/sct_search.png';
+import sctFeatured from '../assets/images/sct_featured.png';
+import sctBestselling from '../assets/images/sct_bestselling.png';
+import sctBrands from '../assets/images/sct_brands.png';
+import sctAdminReal from '../assets/images/supercheap_admin_real.png';
 import p1 from '../assets/images/p1.png';
 import p12 from '../assets/images/p12.png';
 import p13 from '../assets/images/p13.png';
@@ -150,6 +156,14 @@ import { FaGithub } from "react-icons/fa";
 
 const projects = [
   {
+    img: sctHero,
+    images: [sctHero, sctSearch, sctFeatured, sctBestselling, sctBrands, sctAdminReal],
+    title: "Super Cheap Tyre",
+    category: "web development",
+    link: "https://supercheaptyre.com.au/",
+    adminLink: "https://admin.supercheaptyre.com.au"
+  },
+  {
     img: p1,
     images: [p1, p12, p13, p14, p15, p16, p17, p18, p19, p110, p111, p112, p113, p114, p115, p116, p117, p118, p119, p120, p121, p122, p123, p124, p125, p126, p127, p128, p129, p130, p131, p132, p133, p134, p135, p136, p137, p138, p139, p140, p141, p142, p143, p144, p145, p146, p147, p148, p149, p150, p151],
     title: "School Management",
@@ -191,7 +205,7 @@ const projects = [
     category: "web development",
     github: "https://github.com/VivekPatel4/Food-Shop-Web-Application-ASP.NET-Framework-"
   },
-  
+
 ];
 
 const categories = [
@@ -212,6 +226,13 @@ function Protfolio() {
       ? projects
       : projects.filter((p) => p.category === selectedCategory);
 
+  const availableCategories = categories.filter(cat => {
+    if (cat.value === 'all') {
+      return projects.length > 0;
+    }
+    return projects.filter(p => p.category === cat.value).length > 0;
+  });
+
   const openLightbox = (projectIndex) => {
     setCurrentProjectIndex(projectIndex);
     setCurrentImageIndex(0);
@@ -224,14 +245,14 @@ function Protfolio() {
 
   const nextImage = () => {
     const currentProject = filteredProjects[currentProjectIndex];
-    setCurrentImageIndex((prev) => 
+    setCurrentImageIndex((prev) =>
       prev === currentProject.images.length - 1 ? 0 : prev + 1
     );
   };
 
   const prevImage = () => {
     const currentProject = filteredProjects[currentProjectIndex];
-    setCurrentImageIndex((prev) => 
+    setCurrentImageIndex((prev) =>
       prev === 0 ? currentProject.images.length - 1 : prev - 1
     );
   };
@@ -250,7 +271,7 @@ function Protfolio() {
 
       <section className="projects">
         <ul className="filter-list">
-          {categories.map((cat) => (
+          {availableCategories.map((cat) => (
             <li className="filter-item" key={cat.value}>
               <button
                 className={selectedCategory === cat.value ? "active" : ""}
@@ -279,17 +300,47 @@ function Protfolio() {
                   <img src={project.img} alt={project.title} loading="lazy" />
                 </figure>
                 <h3 className="project-title">{project.title}</h3>
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="github-link"
-                  >
-                    <FaGithub style={{ fontSize: "1.1em" }} />
-                    View on GitHub
-                  </a>
-                )}
+                <div style={{ display: 'flex', gap: '15px', marginTop: '5px', flexWrap: 'wrap' }}>
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="github-link"
+                      style={{ display: 'flex', alignItems: 'center', gap: '5px', zIndex: 10 }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <FaGithub style={{ fontSize: "1.1em" }} />
+                      GitHub
+                    </a>
+                  )}
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="github-link"
+                      style={{ display: 'flex', alignItems: 'center', gap: '5px', zIndex: 10 }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <ion-icon name="globe-outline"></ion-icon>
+                      Live Site
+                    </a>
+                  )}
+                  {project.adminLink && (
+                    <a
+                      href={project.adminLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="github-link"
+                      style={{ display: 'flex', alignItems: 'center', gap: '5px', zIndex: 10 }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <ion-icon name="settings-outline"></ion-icon>
+                      Admin
+                    </a>
+                  )}
+                </div>
                 <p className="project-category">
                   {project.category.charAt(0).toUpperCase() +
                     project.category.slice(1)}
@@ -307,14 +358,14 @@ function Protfolio() {
             <button className="lightbox-close" onClick={closeLightbox}>
               <ion-icon name="close-outline"></ion-icon>
             </button>
-            
+
             <button className="lightbox-nav lightbox-prev" onClick={prevImage}>
               <ion-icon name="chevron-back-outline"></ion-icon>
             </button>
-            
+
             <div className="lightbox-image-container">
-              <img 
-                src={filteredProjects[currentProjectIndex].images[currentImageIndex]} 
+              <img
+                src={filteredProjects[currentProjectIndex].images[currentImageIndex]}
                 alt={`${filteredProjects[currentProjectIndex].title} - Image ${currentImageIndex + 1}`}
                 className="lightbox-image"
               />
@@ -326,7 +377,7 @@ function Protfolio() {
                 </span>
               </div>
             </div>
-            
+
             <button className="lightbox-nav lightbox-next" onClick={nextImage}>
               <ion-icon name="chevron-forward-outline"></ion-icon>
             </button>

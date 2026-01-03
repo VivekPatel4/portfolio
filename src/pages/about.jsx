@@ -1,9 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 // Import all images
 import iconDesign from '../assets/images/icon-design.svg';
 import iconDev from '../assets/images/icon-dev.svg';
 import iconApp from '../assets/images/api.svg';
 import iconPhoto from '../assets/images/learn.svg';
+import st1 from '../assets/images/sct_hero.png';
 import avatar1 from '../assets/images/shop2.jpg';
 import avatar2 from '../assets/images/school.png';
 import avatar3 from '../assets/images/Property.webp';
@@ -24,6 +29,12 @@ import logo12 from '../assets/images/stripe.jpg';
 import logo13 from '../assets/images/Razor.webp';
 
 const testimonialsData = [
+  {
+    title: "Super Cheap Tyre",
+    avatar: st1,
+    alt: "Super Cheap Tyre",
+    text: "A live, full-stack e-commerce business solution with two powerful sides. The User Frontend features 'Search by Size/Brand', inclusive pricing calculations, and a booking system with 25% deposit & Stripe payments. The Admin Dashboard (CMS) manages the entire business: Inventory, Appointments, TimeSlots, Staff, Invoices, and Google Reviews. Secured with 2FA."
+  },
   {
     title: "🛒 Shop – E-commerce Platform",
     avatar: avatar1,
@@ -55,53 +66,6 @@ const clientsData = [
 ];
 
 function About() {
-  const testimonialsRef = useRef(null);
-  const clientsRef = useRef(null);
-
-  useEffect(() => {
-    const setupAutoScroll = (ref, speed = 1) => {
-      if (!ref.current) return;
-
-      let animationId;
-      const scroll = () => {
-        if (ref.current) {
-          ref.current.scrollLeft += speed;
-          // Reset scroll when it reaches the halfway point (end of first set)
-          if (ref.current.scrollLeft >= ref.current.scrollWidth / 2) {
-            ref.current.scrollLeft = 0;
-          }
-        }
-        animationId = requestAnimationFrame(scroll);
-      };
-
-      animationId = requestAnimationFrame(scroll);
-
-      const stopScroll = () => cancelAnimationFrame(animationId);
-      const startScroll = () => {
-        stopScroll();
-        animationId = requestAnimationFrame(scroll);
-      };
-
-      ref.current.addEventListener('mouseenter', stopScroll);
-      ref.current.addEventListener('mouseleave', startScroll);
-
-      return () => {
-        stopScroll();
-        if (ref.current) {
-          ref.current.removeEventListener('mouseenter', stopScroll);
-          ref.current.removeEventListener('mouseleave', startScroll);
-        }
-      };
-    };
-
-    const cleanupTestimonials = setupAutoScroll(testimonialsRef, 0.5);
-    const cleanupClients = setupAutoScroll(clientsRef, 0.5);
-
-    return () => {
-      cleanupTestimonials && cleanupTestimonials();
-      cleanupClients && cleanupClients();
-    };
-  }, []);
 
   return (
 
@@ -113,9 +77,9 @@ function About() {
 
       <section className="about-text">
         <p>
-          Hi, I’m Vivek Patel, a self-taught and dedicated developer from Gujarat, India. As a fresher, I’ve built multiple
-          real-world inspired web applications to strengthen my skills in solving problems with logic and writing clean,
-          maintainable code. I enjoy building user-friendly and scalable web solutions using modern technologies.
+          Hi, I’m Vivek Patel, a dedicated and experienced developer from Gujarat, India. I specialize in building
+          scalable, real-world web applications that solve complex problems with efficient logic and clean,
+          maintainable code. I enjoy delivering user-friendly and high-performance web solutions using modern technologies.
         </p>
 
         <p>
@@ -203,13 +167,31 @@ function About() {
 
         <h3 className="h3 testimonials-title">What I've Built</h3>
 
-        <ul className="testimonials-list has-scrollbar" ref={testimonialsRef} style={{ scrollSnapType: 'none', scrollBehavior: 'auto' }}>
-          {[...testimonialsData, ...testimonialsData].map((item, index) => (
-            <li className="testimonials-item" key={index}>
-              <div className="content-card" data-testimonials-item>
+        <Swiper
+          modules={[Pagination, Autoplay]}
+          spaceBetween={30}
+          slidesPerView={1}
+          loop={true}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          breakpoints={{
+            768: {
+              slidesPerView: 2,
+            }
+          }}
+          className="testimonials-list"
+          style={{ paddingBottom: '40px' }} // Add space for pagination bullets
+        >
+          {testimonialsData.map((item, index) => (
+            <SwiperSlide key={index} className="testimonials-item" style={{ height: 'auto' }}>
+              <div className="content-card" data-testimonials-item style={{ height: '100%' }}>
 
                 <figure className="testimonials-avatar-box">
-                  <img src={item.avatar} alt={item.alt} width="60" data-testimonials-avatar />
+                  <img
+                    src={item.avatar}
+                    alt={item.alt}
+                    data-testimonials-avatar
+                  />
                 </figure>
 
                 <h4 className="h4 testimonials-item-title" data-testimonials-title>{item.title}</h4>
@@ -219,9 +201,9 @@ function About() {
                 </div>
 
               </div>
-            </li>
+            </SwiperSlide>
           ))}
-        </ul>
+        </Swiper>
 
       </section>
 
@@ -281,15 +263,33 @@ function About() {
 
         <h3 className="h3 clients-title">Technologies I've Worked With</h3>
 
-        <ul className="clients-list has-scrollbar" ref={clientsRef} style={{ scrollSnapType: 'none', scrollBehavior: 'auto' }}>
-          {[...clientsData, ...clientsData].map((logo, index) => (
-            <li className="clients-item" key={index}>
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={30}
+          slidesPerView={3}
+          loop={true}
+          autoplay={{ delay: 2000, disableOnInteraction: false }}
+          breakpoints={{
+            450: {
+              slidesPerView: 4,
+            },
+            768: {
+              slidesPerView: 5,
+            },
+            1024: {
+              slidesPerView: 6,
+            }
+          }}
+          className="clients-list"
+        >
+          {clientsData.map((logo, index) => (
+            <SwiperSlide className="clients-item" key={index}>
               <a href="#">
                 <img src={logo} alt="client logo" />
               </a>
-            </li>
+            </SwiperSlide>
           ))}
-        </ul>
+        </Swiper>
 
       </section>
 
